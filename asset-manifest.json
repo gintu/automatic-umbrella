@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/automatic-umbrella/static/css/main.5e11c27b.css",
+    "main.js": "/automatic-umbrella/static/js/main.af926063.js",
+    "index.html": "/automatic-umbrella/index.html",
+    "main.5e11c27b.css.map": "/automatic-umbrella/static/css/main.5e11c27b.css.map",
+    "main.af926063.js.map": "/automatic-umbrella/static/js/main.af926063.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5e11c27b.css",
+    "static/js/main.af926063.js"
+  ]
+}
