@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import classes from "./styles.module.scss";
 
 function Form({ initialValues, onSubmit }) {
   const [title, setTitle] = React.useState(initialValues?.title || "");
@@ -27,7 +26,6 @@ function Form({ initialValues, onSubmit }) {
         fullWidth
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className={classes.input}
         style={{ marginTop: "1rem" }}
         error={!!error}
         helperText={error}

@@ -6,11 +6,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-import classes from "./styles.module.scss";
 
 export default function ButtonAppBar({ title, action }) {
   return (
-    <Box sx={{ flexGrow: 1 }} className={classes.container}>
+    <Box sx={{ flexGrow: 1 }} style={{ marginBottom: "3rem" }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton

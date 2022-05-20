@@ -9,8 +9,6 @@ import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import classes from "./styles.module.scss";
-
 const options = {
   weekday: "long",
   year: "numeric",
@@ -30,7 +28,11 @@ function Todo({
 }) {
   return (
     <div>
-      <Card sx={{ minWidth: 275 }} className={classes.todo} variant="outlined">
+      <Card
+        sx={{ minWidth: 275 }}
+        style={{ marginTop: "1rem" }}
+        variant="outlined"
+      >
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Added on {createdOn.toLocaleDateString("en-US", options)}
@@ -38,14 +40,15 @@ function Todo({
           <Typography
             variant="h5"
             component="div"
-            className={isCompleted ? classes.strike : ""}
+            style={{ textDecoration: isCompleted ? "line-through" : "none" }}
+            // className={isCompleted ? classes.strike : ""}
           >
             {title}
           </Typography>
           <Typography
             sx={{ mb: 1.5 }}
             color="text.secondary"
-            className={isCompleted ? classes.strike : ""}
+            style={{ textDecoration: isCompleted ? "line-through" : "none" }}
           >
             {desc}
           </Typography>

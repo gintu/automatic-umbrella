@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import AppBar from "../AppBar";
 import Todo from "../Todo";
 import { useNavigate } from "react-router-dom";
-import classes from "./styles.module.scss";
 import Dash from "../Dash";
 
 function ListTodos({
@@ -25,13 +24,24 @@ function ListTodos({
     return todos.filter((todo) => !todo.isCompleted && !todo.isDeleted);
   };
 
-  const [filtedTodos, setFiltedTodos] = React.useState(getRemainingTodos());
+  const [filtedTodos, setFiltedTodos] = React.useState([]);
+  const [activeFilter, setActiveFilter] = React.useState("all");
 
-  const activeFilterRef = useRef("all");
+  // const activeFilter = useRef("all");
   //deep compare todos
   useEffect(() => {
-    setFiltedTodos(getRemainingTodos());
-  }, [JSON.stringify(todos)]);
+    if (activeFilter === "all") {
+      setFiltedTodos(
+        todos.filter((todo) => !todo.isCompleted && !todo.isDeleted)
+      );
+    } else if (activeFilter === "completed") {
+      setFiltedTodos(
+        todos.filter((todo) => todo.isCompleted && !todo.isDeleted)
+      );
+    } else if (activeFilter === "deleted") {
+      setFiltedTodos(todos.filter((todo) => todo.isDeleted));
+    }
+  }, [JSON.stringify(todos), activeFilter]);
 
   const onClickAddTodo = () => {
     navigate("add");
@@ -43,20 +53,7 @@ function ListTodos({
     onClickDeleteTodo(id);
   };
   const handleFilter = (filter) => {
-    if (filter === "all") {
-      activeFilterRef.current = "all";
-      setFiltedTodos(
-        todos.filter((todo) => !todo.isDeleted && !todo.isCompleted)
-      );
-    } else if (filter === "completed") {
-      activeFilterRef.current = "completed";
-      setFiltedTodos(
-        todos.filter((todo) => todo.isCompleted && !todo.isDeleted)
-      );
-    } else if (filter === "deleted") {
-      activeFilterRef.current = "deleted";
-      setFiltedTodos(todos.filter((todo) => todo.isDeleted));
-    }
+    setActiveFilter(filter);
   };
 
   return (
@@ -68,11 +65,11 @@ function ListTodos({
           dispatch: onClickAddTodo,
         }}
       />
-      <Container maxWidth="sm" style={classes.continer}>
+      <Container maxWidth="sm" style={{ marginTop: "2rem" }}>
         <Dash
           handleFilterClick={handleFilter}
           remainingTodos={getRemainingTodos().length}
-          activeFilter={activeFilterRef.current}
+          activeFilter={activeFilter}
         />
         {filtedTodos.length > 0 ? (
           filtedTodos.map((todo) => (
@@ -96,9 +93,7 @@ function ListTodos({
             }}
           >
             nothing to show here.{" "}
-            {activeFilterRef.current === "all"
-              ? "Click add todo to get started"
-              : ""}
+            {activeFilter === "all" ? "Click add todo to get started" : ""}
           </Typography>
         )}
       </Container>
