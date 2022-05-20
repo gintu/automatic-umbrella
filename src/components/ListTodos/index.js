@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Dialog from "@mui/material/Dialog";
@@ -41,6 +41,7 @@ function ListTodos({
     } else if (activeFilter === "deleted") {
       setFiltedTodos(todos.filter((todo) => todo.isDeleted));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(todos), activeFilter]);
 
   const onClickAddTodo = () => {
